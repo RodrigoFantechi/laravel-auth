@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <h1>Projects</h1>
-<a class="btn btn-primary position-fixed bottom-0 end-0 m-5" href="#" role="button">Button</a>
+<a class="btn btn-primary position-fixed bottom-0 end-0 m-5" href="{{route('admin.projects.create')}}" role="button"><i class="fas fa-plus fa-lg "></i></a>
 <div class="container">
     <div class="table-responsive">
         <table class="table table-striped
