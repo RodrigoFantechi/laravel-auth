@@ -64,7 +64,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -76,7 +76,11 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $val_data = $request->validated();
+        $slug_data = Project::createSlug($val_data['title']);
+        $val_data['slug'] =  $slug_data;
+        $project->update($val_data);
+        return redirect()->route('admin.projects.index')->with('message', "$project->title update successfully");
     }
 
     /**
@@ -87,6 +91,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('admin.projects.index')->with('message', "$project->title deleted successfully");
     }
 }
