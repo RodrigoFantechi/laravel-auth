@@ -28,9 +28,9 @@
                     <td>{{$project->title}}</td>
                     <td>{{$project->slug}}</td>
                     <td>{{$project->description}}</td>
-                    <td>
+                    <td class="d-sm-flex d-xxl-block flex-column min">
                         <a href="{{route('admin.projects.show', $project->slug)}}" class="btn bg-primary"><i class="fas fa-eye fa-md text-light"></i></a>
-                        <a href="{{route('admin.projects.edit', $project->slug)}}" class="btn bg-secondary"><i class="fas fa-pencil fa-md text-light"></i></a>
+                        <a href="{{route('admin.projects.edit', $project->slug)}}" class="btn bg-secondary my-1"><i class="fas fa-pencil fa-md text-light"></i></a>
 
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteComic-{{$project->slug}}">
                             <i class="fas fa-trash fa-md text-light"></i>

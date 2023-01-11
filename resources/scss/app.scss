@@ -5,6 +5,12 @@
 body {
     font-size: .875rem;
   }
+  @media screen and (max-width: 1580px) and (min-width: 1400px) {
+      .min{
+    min-width: 150px;
+  }
+  }
+
   .image{
     
     width: 50px;
