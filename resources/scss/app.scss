@@ -5,7 +5,16 @@
 body {
     font-size: .875rem;
   }
-  
+  .image{
+    
+    width: 50px;
+    aspect-ratio: 1/1;
+    img{
+      height: 100%;
+      width: 100%;
+      object-fit:cover;
+    }
+  }
   .feather {
     width: 16px;
     height: 16px;
