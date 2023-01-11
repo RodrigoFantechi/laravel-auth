@@ -11,7 +11,7 @@
         </ul>
     </div>
     @endif
-    <form action="{{route('admin.projects.update', $project->id)}}" method="post" class="card p-3">
+    <form action="{{route('admin.projects.update', $project->slug)}}" method="post" class="card p-3">
         @csrf
         @method('PUT')
         <div class="mb-3">
