@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -37,9 +38,13 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+
         $val_data = $request->validated();
+
+        $img_path = Storage::disk('public')->put('uploads', $request['cover_image']);
         $slug_data = Project::createSlug($val_data['title']);
         $val_data['slug'] =  $slug_data;
+        $val_data['cover_image'] =   $img_path;
         $project = Project::create($val_data);
 
         return redirect()->route('admin.projects.index')->with('message', "$project->title add successfully");
@@ -53,6 +58,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        // dd($project);
         return view('admin.projects.show', compact('project'));
     }
 
@@ -76,10 +82,24 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+
         $val_data = $request->validated();
+
+        if($request['cover_image']){
+            if ($project['cover_image']) {
+                Storage::disk('public')->delete($project->cover_image);
+            }
+            $img_path = Storage::disk('public')->put('uploads', $request['cover_image']);
+            $val_data['cover_image'] =   $img_path;
+        }
+        
+        
         $slug_data = Project::createSlug($val_data['title']);
         $val_data['slug'] =  $slug_data;
         $project->update($val_data);
+
+
+
         return redirect()->route('admin.projects.index')->with('message', "$project->title update successfully");
     }
 
@@ -91,7 +111,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project['cover_image']) {
+            Storage::disk('public')->delete($project->cover_image);
+        }
         $project->delete();
+
         return redirect()->route('admin.projects.index')->with('message', "$project->title deleted successfully");
     }
 }
