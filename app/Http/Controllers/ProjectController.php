@@ -40,11 +40,12 @@ class ProjectController extends Controller
     {
 
         $val_data = $request->validated();
-
-        $img_path = Storage::disk('public')->put('uploads', $request['cover_image']);
+        if ($request->hasFile('cover_image')){
+            $img_path = Storage::disk('public')->put('uploads', $request['cover_image']);
+            $val_data['cover_image'] =   $img_path;
+        }
         $slug_data = Project::createSlug($val_data['title']);
         $val_data['slug'] =  $slug_data;
-        $val_data['cover_image'] =   $img_path;
         $project = Project::create($val_data);
 
         return redirect()->route('admin.projects.index')->with('message', "$project->title add successfully");
