@@ -16,6 +16,7 @@
     align-middle">
             <thead class="table-light">
                 <tr>
+                    <th>ID</th>
                     <th>Title</th>
                     <th>Slug</th>
                     <th>Description</th>
@@ -25,6 +26,7 @@
             <tbody class="table-group-divider">
                 @foreach($projects as $project)
                 <tr class="table-primary">
+                    <td>{{$project->id}}</td>
                     <td>{{$project->title}}</td>
                     <td>{{$project->slug}}</td>
                     <td>{{$project->description}}</td>
